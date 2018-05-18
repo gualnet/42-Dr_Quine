@@ -1,0 +1,2 @@
+#include <stdio.h>
+int	main(){char *str1 = "#include <stdio.h>%c";char *str2 = "int	main(){char *str1 = %c%s%c;char *str2 = %c%s%c;printf(str1, 10);printf(str2, 34, str1, 34, 34, str2, 34);}";printf(str1, 10);printf(str2, 34, str1, 34, 34, str2, 34);}
