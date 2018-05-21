@@ -6,7 +6,7 @@
 #    By: galy <galy@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/09 15:00:23 by galy              #+#    #+#              #
-#    Updated: 2018/05/18 17:11:02 by galy             ###   ########.fr        #
+#    Updated: 2018/05/18 17:36:38 by galy             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,8 +58,9 @@ CUR_CLR		=	\033[K
 ####RULEZ####
 
 all			: OBJD
-	$(CC) $(SRCDIR)/Colleen.c -o Colleen
-	$(CC) $(SRCDIR)/Grace.c -o Grace
+	# $(CC) $(SRCDIR)/Colleen.c -o Colleen
+	# $(CC) $(SRCDIR)/Grace.c -o Grace
+	$(CC) $(SRCDIR)/Sully.c -o Sully
 
 clean		:
 	$(RM) -r $(OBJDIR)
@@ -69,6 +70,7 @@ mini_clean	:
 fclean		: clean
 	$(RM) Colleen
 	$(RM) Grace
+	$(RM) Sully
 	$(RM) Grace_kid.c
 
 re			: fclean print_inter_line all
