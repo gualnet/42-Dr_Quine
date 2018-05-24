@@ -6,20 +6,21 @@
 #    By: galy <galy@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/09 15:00:23 by galy              #+#    #+#              #
-#    Updated: 2018/05/18 17:36:38 by galy             ###   ########.fr        #
+#    Updated: 2018/05/22 10:50:29 by galy             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		=	clang
 CFLAGS	=	-Wall -Werror -Wextra
 # CFLAGS	=	-Wall -Werror -Wextra -fsanitize=address -g
-# NA		=	/usr/local/bin/nasm
-# NAFLAG	=	-f macho64
+NA		=	/usr/local/bin/nasm
+NAFLAG	=	-f macho64
 # LD		=	ld
 
 ####DIRECTORY####
 
-SRCDIR		=	src_c
+SRCDIR_C	=	src_c
+SRCDIR_S	=	src_asm
 OBJDIR		=	obj
 INCDIR		=	inc
 
@@ -58,20 +59,26 @@ CUR_CLR		=	\033[K
 ####RULEZ####
 
 all			: OBJD
-	# $(CC) $(SRCDIR)/Colleen.c -o Colleen
-	# $(CC) $(SRCDIR)/Grace.c -o Grace
-	$(CC) $(SRCDIR)/Sully.c -o Sully
+####     C     ####
+	# $(CC) $(SRCDIR_C)/Colleen.c -o $(SRCDIR_C)/Colleen
+	# $(CC) $(SRCDIR_C)/Grace.c -o $(SRCDIR_C)/Grace
+	# $(CC) $(SRCDIR_C)/Sully.c -o $(SRCDIR_C)/Sully
+####    ASM    ####
+	$(NA) $(NAFLAG) $(SRCDIR_S)/Colleen.s -o./Colleen.o
+	ld -macosx_version_min 10.8 -lSystem Colleen.o -o Colleen
 
 clean		:
 	$(RM) -r $(OBJDIR)
+	$(RM) Colleen.o
 
 mini_clean	:
 
 fclean		: clean
-	$(RM) Colleen
-	$(RM) Grace
-	$(RM) Sully
+	$(RM) $(SRCDIR_C)/Colleen
+	$(RM) $(SRCDIR_C)/Grace
+	$(RM) $(SRCDIR_C)/Sully
 	$(RM) Grace_kid.c
+	$(RM) Colleen
 
 re			: fclean print_inter_line all
 
