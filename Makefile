@@ -5,21 +5,15 @@
 #                                                     +:+ +:+         +:+      #
 #    By: galy <galy@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/05/09 15:00:23 by galy              #+#    #+#              #
-#    Updated: 2018/06/04 15:25:59 by galy             ###   ########.fr        #
+#    Created: 2018/06/04 15:18:33 by galy              #+#    #+#              #
+#    Updated: 2018/06/04 15:21:31 by galy             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-
-NA		=	nasm
-NAFLAG	=	-f macho64
-LD		=	ld
-
 ####DIRECTORY####
 
-SRCDIR		=	.
-OBJDIR		=	obj
-INCDIR		=	inc
+DIR_C		=	src_c
+DIR_ASM		=	src_asm
 
 ####COLOR-SET####
 
@@ -35,44 +29,26 @@ CMAGENTA	=	\033[35m
 CCYAN		=	\033[36m
 CWHITE		=	\033[37m
 
+
 ####CURSOR-SET####
 
 CUR_SVE		=	\033[s
 CUR_RST		=	\033[u
 CUR_CLR		=	\033[K
 
+
 ####RULEZ####
 
-all			: OBJD
-	$(NA) $(NAFLAG) $(SRCDIR)/Colleen.s -o $(OBJDIR)/Colleen.o
-	$(LD) -macosx_version_min 10.8 -lSystem $(OBJDIR)/Colleen.o -o $(SRCDIR)/Colleen
-	$(NA) $(NAFLAG) $(SRCDIR)/Grace.s -o $(OBJDIR)/Grace.o
-	$(LD) -macosx_version_min 10.8 -lSystem $(OBJDIR)/Grace.o -o $(SRCDIR)/Grace
-	$(NA) $(NAFLAG) $(SRCDIR)/Sully.s -o $(OBJDIR)/Sully.o
-	$(LD) -macosx_version_min 10.8 -lSystem $(OBJDIR)/Sully.o -o $(SRCDIR)/Sully
-
+all			:
+	make -C $(DIR_C)
+	make -C $(DIR_ASM)
 clean		:
-	$(RM) -r $(OBJDIR)
 
 mini_clean	:
 
-fclean		: clean
-	$(RM) $(SRCDIR)/Colleen
-	$(RM) $(SRCDIR)/Grace
-	$(RM) $(SRCDIR)/Sully
-	
+fclean		:
 
-re			: fclean print_inter_line all
+re			:
 
 
 ####MORE_RULEZ####
-
-$(OBJDIR)/%.o: $(SRCDIR)/%.s
-	$(CC) $(CFLAGS) $^ -o $@
-
-print_inter_line	:
-	@printf "$(CBLUE+)	-----$(CRESET)	$(CWHITE)-----	$(CRED)-----$(CRESET)\n"
-
-OBJD		:
-	@mkdir -p $(OBJDIR)
-
