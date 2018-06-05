@@ -6,7 +6,7 @@
 #    By: galy <galy@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/04 15:18:33 by galy              #+#    #+#              #
-#    Updated: 2018/06/04 15:21:31 by galy             ###   ########.fr        #
+#    Updated: 2018/06/04 17:57:30 by galy             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,12 +43,11 @@ all			:
 	make -C $(DIR_C)
 	make -C $(DIR_ASM)
 clean		:
-
-mini_clean	:
+	make -C $(DIR_C) clean
+	make -C $(DIR_ASM) clean
 
 fclean		:
+	make -C $(DIR_C) fclean
+	make -C $(DIR_ASM) fclean
 
-re			:
-
-
-####MORE_RULEZ####
+re			: fclean re
